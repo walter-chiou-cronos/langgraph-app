@@ -1,0 +1,8 @@
+# misc
+.DS_Store
+*.pem
+
+temp
+node_modules
+
+.env
