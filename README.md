@@ -11,6 +11,13 @@ This code demonstrates a **Tweet-to-Image Generation Workflow** using LangGraphJ
 
 ---
 
+## Samples
+
+- tweet 1: https://gist.github.com/walter-chiou-cronos/627ba2f062811fff968d57e053f344d0
+- tweet 2 (remove branding) : https://gist.github.com/walter-chiou-cronos/2a6164268a3bd2ca7a262ce4886c955a
+
+---
+
 ## Thought Process
 
 1. **Define the Workflow**:
