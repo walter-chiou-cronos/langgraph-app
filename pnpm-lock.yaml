@@ -26,6 +26,12 @@ importers:
       '@langchain/openai':
         specifier: ^0.5.10
         version: 0.5.10(@langchain/core@0.3.56(openai@4.100.0(ws@8.18.2)(zod@3.24.4)))(ws@8.18.2)
+      '@types/openapi-v3':
+        specifier: ^3.0.0
+        version: 3.0.0
+      axios:
+        specifier: ^1.9.0
+        version: 1.9.0(debug@4.4.1)
       dedent:
         specifier: ^1.6.0
         version: 1.6.0
@@ -35,6 +41,9 @@ importers:
       zod:
         specifier: ^3.24.4
         version: 3.24.4
+      zod-to-json-schema:
+        specifier: ^3.24.5
+        version: 3.24.5(zod@3.24.4)
     devDependencies:
       '@types/node':
         specifier: ^22.15.18
@@ -561,6 +570,9 @@ packages:
 
   '@types/node@22.15.18':
     resolution: {integrity: sha512-v1DKRfUdyW+jJhZNEI1PYy29S2YRxMV5AOO/x/SjKmW0acCIOqmbj6Haf9eHAhsPmrhlHSxEhv/1WszcLWV4cg==}
+
+  '@types/openapi-v3@3.0.0':
+    resolution: {integrity: sha512-28rr3cSUMosJLVuCrAVM1HixzjaspZ/sO9aKhnGGSZhnsu+ecG4MhAWG7ou6b4TXsM3Uns5RPD4xsmjPbp6zdA==}
 
   '@types/retry@0.12.0':
     resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
@@ -1495,6 +1507,8 @@ snapshots:
   '@types/node@22.15.18':
     dependencies:
       undici-types: 6.21.0
+
+  '@types/openapi-v3@3.0.0': {}
 
   '@types/retry@0.12.0': {}
 
