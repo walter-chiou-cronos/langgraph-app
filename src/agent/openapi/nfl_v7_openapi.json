@@ -1,0 +1,1451 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sportradar NFL v7",
+        "description": "Sportradar’s NFL API v7 offers a comprehensive suite of game and seasonal stats. Whether you are looking for the fastest gameday updates, your favorite player’s season stats, or in-depth subjective statistics, Sportradar has you covered.\n\nAll game data feeds update in real-time as games are played and are compiled via expert Sportradar in-house operators. All NFL games – including preseason – feature full coverage.\n\nPrimary feeds will return schedules, standings, team/player data, and real-time scores.\n\nAdditional feeds provide a host of complimentary stats, including:\n\n- Team rosters\n- Depth charts\n- Weekly injuries\n- Seasonal statistics\n- Subjective statistics\n- Draft information\n    \n\nReal-time customers are also offered four delivery Push Feeds to enhance speed.\n\nThe easiest way to get started with the API is to click the fork button to fork this collection to your own workspace and use Postman to send requests.\n\nTo receive trial access, visit [this page](https://developer.sportradar.com/getting-started/docs/make-your-first-call#create-an-account).",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.sportradar.com/nfl/official/trial/v7/"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "apikeyAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "x-api-key"
+            }
+        }
+    },
+    "security": [
+        {
+            "apikeyAuth": []
+        }
+    ],
+    "paths": {
+        "/{locale}/games/current_season/schedule.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Current Season Schedule",
+                "description": "Provides schedule information for the current season, including venue and broadcast info, and scoring results by quarter.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/games/current_week/schedule.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Current Week Schedule",
+                "description": "Provides schedule information for the current week, including venue and broadcast info, and scoring results by quarter.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/league/{year}/{month}/{day}/changes.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Daily Change Log",
+                "description": "Provides IDs and timestamps for teams, players, game statistics, schedules, and standings that have been modified on a given date. To receive the data updates, use these unique IDs to pull relevant API feeds.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Month in 2 digit format",
+                        "example": "08"
+                    },
+                    {
+                        "name": "day",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Day in 2 digit format",
+                        "example": "28"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/league/{year}/{month}/{day}/transactions.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Daily Transactions",
+                "description": "Provides IDs and timestamps for teams, players, game statistics, schedules, and standings that have been modified on a given date. To receive the data updates, use these unique IDs to pull relevant API feeds.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2022"
+                    },
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Month in 2 digit format",
+                        "example": "07"
+                    },
+                    {
+                        "name": "day",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Day in 2 digit format",
+                        "example": "14"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/{year}/draft.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Draft Summary",
+                "description": "Provides pre-draft pick order with live pick selections during the draft. Displays information on draft rounds, picks, teams, and prospects for a given draft year.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/games/{game_id}/boxscore.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Game Boxscore",
+                "description": "Provides game scoring information for each team, including complete play-by-play information for all scoring drives.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "game_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a game",
+                        "example": "7d06369a-382a-448a-b295-6da9eab53245"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/games/{game_id}/pbp.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Game Play-by-Play",
+                "description": "Provides a live play-by-play timeline, including possession and location information as well as all team and player statistics earned on each play.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "game_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a game",
+                        "example": "7d06369a-382a-448a-b295-6da9eab53245"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/games/{game_id}/roster.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Game Roster",
+                "description": "Provides complete game roster information for each team, including game status and player profile data.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "game_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a game",
+                        "example": "7d06369a-382a-448a-b295-6da9eab53245"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/games/{game_id}/statistics.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Game Statistics",
+                "description": "Provides extensive team and player level game statistics for each team.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "game_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a game",
+                        "example": "7d06369a-382a-448a-b295-6da9eab53245"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/league/hierarchy.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "League Hierarchy",
+                "description": "Provides top-level information for each team, including conference and division distinction, venue information, and team colors.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/players/{player_id}/profile.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Player Profile",
+                "description": "Provides player biographical information, draft information, and seasonal statistics for the regular season and postseason.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "player_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a player",
+                        "example": "0acdcd3b-5442-4311-a139-ae7c506faf88"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/seasons/{year}/{season_type}/standings/season.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Postgame Standings",
+                "description": "Provides standings information for each team, updated postgame.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "season_type",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Season type as Preseason (PRE), Regular (REG), or Postseason (PST)",
+                        "example": "REG"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/{year}/prospects.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Prospects",
+                "description": "Provides a list of upcoming or historical draft prospects for a given year.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/games/{year}/{season_type}/schedule.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Season Schedule",
+                "description": "Provides complete schedule information for a given season, including venue and broadcast info, and scoring results by quarter.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "season_type",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Season type as Preseason (PRE), Regular (REG), or Postseason (PST)",
+                        "example": "REG"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/seasons/{year}/{season_type}/teams/{team_id}/statistics.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Seasonal Statistics",
+                "description": "Provides complete team and player seasonal statistics for a given season and season type.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "season_type",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Season type as Preseason (PRE), Regular (REG), or Postseason (PST)",
+                        "example": "REG"
+                    },
+                    {
+                        "name": "team_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a team",
+                        "example": "d5a2eb42-8065-4174-ab79-0a6fa820e35e"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/league/seasons.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Seasons",
+                "description": "Provides a list of all available seasons, including preseasons and postseasons.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/{year}/teams/{team_id}/draft.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Team Draft Summary",
+                "description": "Provides pre-draft pick order with live pick selections during the draft for a given team.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "team_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a team",
+                        "example": "d5a2eb42-8065-4174-ab79-0a6fa820e35e"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/teams/{team_id}/profile.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Team Profile",
+                "description": "Provides franchise team information, as well as a roster of active players.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "team_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a team",
+                        "example": "0d855753-ea21-4953-89f9-0e20aff9eb73"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/teams/{team_id}/full_roster.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Team Roster",
+                "description": "Provides franchise team information, as well as the complete roster of players.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "team_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) ID of a team",
+                        "example": "0d855753-ea21-4953-89f9-0e20aff9eb73"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/league/teams.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Teams",
+                "description": "Provides a complete list of teams in the NFL API database.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/{year}/top_prospects.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Top Prospects",
+                "description": "Provides a list of the top prospects for a given year.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/tournaments/{year}/{season_type}/schedule.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Tournament List",
+                "description": "Provides a summarized list of all tournaments scheduled for the given season.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "season_type",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Season type as Preseason (PRE), Regular (REG), or Postseason (PST)",
+                        "example": "REG"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/tournaments/{tournament_id}/schedule.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Tournament Schedule",
+                "description": "Provides the date, time, location, and other event details for every matchup taking place in a given tournament.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "tournament_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/tournaments/{tournament_id}/summary.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Tournament Summary",
+                "description": "Provides tournament information including location, status, start date, end date, and participants.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "tournament_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/{year}/trades.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Trades",
+                "description": "Provides summary details of all in-draft trades.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/seasons/{year}/{season_type}/{week_number}/depth_charts.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Weekly Depth Charts",
+                "description": "Provides depth chart information for each team for a given week.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "season_type",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Season type as Preseason (PRE), Regular (REG), or Postseason (PST)",
+                        "example": "REG"
+                    },
+                    {
+                        "name": "week_number",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Week number as an integer",
+                        "example": "1"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/seasons/{year}/{season_type}/{week_number}/injuries.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Weekly Injuries",
+                "description": "Provides a list of injured players for each team for a given week, including practice status.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "season_type",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Season type as Preseason (PRE), Regular (REG), or Postseason (PST)",
+                        "example": "REG"
+                    },
+                    {
+                        "name": "week_number",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Week number as an integer",
+                        "example": "1"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/{locale}/games/{year}/{season_type}/{week_number}/schedule.{format}": {
+            "get": {
+                "tags": [
+                    "default"
+                ],
+                "summary": "Weekly Schedule",
+                "description": "Provides complete schedule information for a given week of the season, including venue, weather conditions, broadcast info, and scoring results by quarter.",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Locale used for translations",
+                        "example": "en"
+                    },
+                    {
+                        "name": "year",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Year in 4 digit format",
+                        "example": "2021"
+                    },
+                    {
+                        "name": "season_type",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "(Required) Season type as Preseason (PRE), Regular (REG), or Postseason (PST)",
+                        "example": "REG"
+                    },
+                    {
+                        "name": "week_number",
+                        "in": "path",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": true,
+                        "description": "(Required) Week number as an integer",
+                        "example": "1"
+                    },
+                    {
+                        "name": "format",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
