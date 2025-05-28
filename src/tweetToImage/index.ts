@@ -82,6 +82,12 @@ const removeBranding = async (state: typeof StateAnnotation.State) => {
   });
   const msg = await openaiLLM.invoke(prompt);
 
+  // console.log(dedent`
+  //   # Remove Branding
+  //   - original tweet: ${state.tweet}
+  //   - new tweet: ${msg.content}
+  // `);
+
   return { tweet: msg.content };
 };
 

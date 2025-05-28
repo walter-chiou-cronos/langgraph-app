@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "start:example": "ts-node src/tweetToImage/example.ts",
+    "start:example": "dotenvx run -f .env -- sh -c 'FILE=${1:-src/tweetToImage/example.ts}; ts-node \"$FILE\"' placeholder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,6 +13,10 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.15.18",
+    "@types/to-json-schema": "^0.2.4",
+    "@types/handlebars-helpers": "^0.5.6",
+    "@types/lodash": "^4.17.17",
+    "@types/openapi-v3": "^3.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
@@ -22,10 +26,20 @@
     "@langchain/core": "^0.3.56",
     "@langchain/google-genai": "^0.2.9",
     "@langchain/langgraph": "^0.2.72",
+    "@langchain/langgraph-checkpoint": "^0.0.17",
     "@langchain/openai": "^0.5.10",
+    "axios": "^1.9.0",
     "dedent": "^1.6.0",
     "dotenv": "^16.5.0",
-    "zod": "^3.24.4"
+    "generate-schema": "^2.6.0",
+    "handlebars": "^4.7.8",
+    "handlebars-helpers": "^0.10.0",
+    "langchain": "^0.3.27",
+    "lodash": "^4.17.21",
+    "lru-cache": "^11.1.0",
+    "to-json-schema": "^0.2.5",
+    "zod": "^3.24.4",
+    "zod-to-json-schema": "^3.24.5"
   },
   "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }
