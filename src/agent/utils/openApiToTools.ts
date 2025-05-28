@@ -199,7 +199,8 @@ const getSecurityHeaders = (
  */
 export function openApiToTools(
   openApiJson: OpenApi,
-  apiKey: string
+  apiKey: string,
+  onSuccessHook: (response: any) => Promise<any> = async (r) => r
 ): DynamicStructuredTool[] {
   if (!openApiJson || !openApiJson.openapi || !openApiJson.paths) {
     throw new Error("Invalid OpenAPI JSON: Missing required fields.");
@@ -268,6 +269,10 @@ export function openApiToTools(
                 ...securityHeaders, // Include security headers
               },
             });
+
+            if (onSuccessHook) {
+              return await onSuccessHook(response.data);
+            }
 
             return response.data;
           } catch (error) {

@@ -3,11 +3,17 @@ import { createNflAgent, createGeckoTerminalAgent } from ".";
 
 const main = async () => {
   const nflAgent = createNflAgent();
+
   const stream = await nflAgent.stream(
     {
-      messages: dedent`
-        when was the last game? who won?
-    `,
+      messages: dedent`who scored the most points last game this season?`,
+
+      //   messages: dedent`
+      //     who scored the most points last game this season?
+
+      //     # Instructions
+      //     - you must call get_game_boxscore tool as first tool call to get the necessary data
+      // `,
     },
     {
       streamMode: "values",
@@ -18,8 +24,7 @@ const main = async () => {
   // const stream = await geckoTerminalAgent.stream(
   //   {
   //     messages: dedent`
-  //       what are the trending coins on ethereum mainnet this week? show me the top 5.
-
+  //       what is the current avg price of $BTC in USD?
   //   `,
   //   },
   //   {
@@ -27,15 +32,19 @@ const main = async () => {
   //   }
   // );
 
-  for await (const { messages } of stream) {
-    let msg = messages[messages?.length - 1];
-    if (msg?.content) {
-      console.log(msg.content);
-    } else if (msg?.tool_calls?.length > 0) {
-      console.log(msg.tool_calls);
-    } else {
-      console.log(msg);
-    }
+  for await (const event of stream) {
+    console.log(event);
+    // const { messages } = event;
+
+    // let msg = messages[messages?.length - 1];
+    // if (msg?.content) {
+    //   console.log(msg.content);
+    // } else if (msg?.tool_calls?.length > 0) {
+    //   console.log("Tool calls.");
+    //   //console.log(msg.tool_calls);
+    // } else {
+    //   console.log(msg);
+    // }
     console.log("-----\n");
   }
 };
