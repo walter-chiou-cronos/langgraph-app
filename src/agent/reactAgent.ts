@@ -518,6 +518,7 @@ export function createReactAgent<
     console.log("====== Summarizing tool call ======");
     console.log(JSON.parse(toolMessage.content as string));
 
+    // need to check if toolMessage.content is json
     const { summary: toolSummary } = await summarizeJson.invoke({
       json: toolMessage.content as string,
     });

@@ -1,24 +1,37 @@
 import dedent from "dedent";
 import { createNflAgent, createGeckoTerminalAgent } from ".";
+import mockData from "./openapi/data.json";
+import { summarizeJson } from "./jsonSummarizer";
 
 const main = async () => {
-  const nflAgent = createNflAgent();
+  console.log(`====== Original Data ======`);
+  console.log(JSON.stringify(mockData, null, 2));
 
-  const stream = await nflAgent.stream(
-    {
-      messages: dedent`who scored the most points last game this season?`,
+  //who won the last game?
+  const stream = await summarizeJson.stream({
+    json: JSON.stringify(mockData),
+    context: dedent`
+      who scored the least points in the last game?
+    `,
+  });
 
-      //   messages: dedent`
-      //     who scored the most points last game this season?
+  // const nflAgent = createNflAgent();
 
-      //     # Instructions
-      //     - you must call get_game_boxscore tool as first tool call to get the necessary data
-      // `,
-    },
-    {
-      streamMode: "values",
-    }
-  );
+  // const stream = await nflAgent.stream(
+  //   {
+  //     messages: dedent`who scored the most points last game this season?`,
+
+  //     //   messages: dedent`
+  //     //     who scored the most points last game this season?
+
+  //     //     # Instructions
+  //     //     - you must call get_game_boxscore tool as first tool call to get the necessary data
+  //     // `,
+  //   },
+  //   {
+  //     streamMode: "values",
+  //   }
+  // );
 
   // const geckoTerminalAgent = createGeckoTerminalAgent();
   // const stream = await geckoTerminalAgent.stream(
