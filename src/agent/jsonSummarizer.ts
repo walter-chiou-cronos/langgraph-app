@@ -12,10 +12,69 @@ import {
 import toJsonSchema from "to-json-schema";
 import Handlebars from "handlebars";
 import handlebarsHelpers from "handlebars-helpers";
+import { PromptTemplate } from "@langchain/core/prompts";
 
 handlebarsHelpers({ handlebars: Handlebars });
 
 const MAX_ATTEMPTS = 5;
+
+const jsonToLogiclessTemplatePrompt = PromptTemplate.fromTemplate(dedent`
+  # Role
+  You are a JSON→Handlebars template generator.
+
+  # Task
+  Produce a **logic-less** Handlebars template that flattens the given JSON schema into a concise text summary, minimizing data size.
+
+  # JSON Schema
+  \`\`\`json
+  {jsonSchema}
+  \`\`\`
+
+  # Template Requirements
+  **ALLOWED HELPERS (ONLY)**
+  - {{#each}}…{{/each}}
+  - {{variable}} (dot-path interpolation)
+
+  **DO NOT USE**
+  - Any conditionals (if/unless)
+  - Comparisons (gt, lt, eq, etc.)
+  - Logical helpers (and, or) or custom helpers
+
+  # Output
+  - reducerTemplate: A Handlebars text template, without any logic, that summarizes the JSON data. do not include any other text or explanation in your response.
+`);
+
+const jsonToLogicBasedTemplatePrompt = PromptTemplate.fromTemplate(dedent`
+  # Role
+  You are en expert in summarizing large json data into a single concise text message
+
+  # Task
+  Create a Handlebars template that extracts the most important information from the provided json schema of the API response data.
+
+  ## Template Syntax Instructions [IMPORTANT]
+  You MUST ONLY use these specific Handlebars helpers:
+  - {{#if}} ... {{else}} ... {{/if}}
+  - {{#unless}} ... {{/unless}}
+  - {{#each}} ... {{/each}}
+  
+  # Json Schema of the input data
+  \`\`\`json
+  {jsonSchema}
+  \`\`\`
+
+  # Instructions
+  - You MUST create a Handlebars template that extracts the most important information from the provided json schema of the input data.
+  - The Json schema represents the structure of the data that will be passed to the template.
+  - Keep important keys such as ID
+
+  # Output Field
+  - reducerTemplate: Return ONLY a valid Handlebars text template using ONLY the allowed helpers. Do NOT include any explanations or additional text in your response.
+`);
+
+const promptTypes: Record<string, PromptTemplate> = {
+  LOGIC_LESS: jsonToLogiclessTemplatePrompt,
+  LOGIC_BASED: jsonToLogicBasedTemplatePrompt,
+};
 
 /**
  * TODO: implement template caching?
@@ -80,34 +139,16 @@ const prepareReducerTemplateNode = async (
   const schema = toJsonSchema(data);
   const jsonSchema = JSON.stringify(schema);
 
+  /**
+   * TODO: consider swapping templates based on the context or error message
+   */
+  const content = await promptTypes.LOGIC_LESS.format({
+    jsonSchema,
+  });
+
   const messages = [
     new SystemMessage({
-      content: dedent`
-          # Role
-          You are en expert in summarizing large json data into a single concise text message
-
-          # Task
-          Create a Handlebars template that extracts the most important information from the provided json schema of the API response data.
-
-          ## Template Syntax Instructions [IMPORTANT]
-          You MUST ONLY use these specific Handlebars helpers:
-          - {{#if}} ... {{else}} ... {{/if}}
-          - {{#unless}} ... {{/unless}}
-          - {{#each}} ... {{/each}}
-          
-          # Json Schema of the input data
-          \`\`\`json
-          ${jsonSchema}
-          \`\`\`
-
-          # Instructions
-          - You MUST create a Handlebars template that extracts the most important information from the provided json schema of the input data.
-          - The Json schema represents the structure of the data that will be passed to the template.
-          - Keep important keys such as ID
-
-          # Output Field
-          - reducerTemplate: Return ONLY a valid Handlebars text template using ONLY the allowed helpers. Do NOT include any explanations or additional text in your response.
-        `,
+      content: content,
     }),
     errorMessage
       ? new HumanMessage({
@@ -150,6 +191,9 @@ const prepareReducerTemplateNode = async (
     )
     .invoke(messages);
 
+  console.log(`====== Reducer Template ======`);
+  console.log(reducerTemplate);
+
   return {
     reducerTemplate,
     data,
@@ -167,9 +211,13 @@ const generateSummaryNode = async (
     const reducer = Handlebars.compile(reducerTemplate);
     const summary = reducer(data);
 
+    console.log(`====== Generated Summary ======`);
+    console.log(summary);
+    console.log(`\n`);
+
     console.log({
-      reducerTemplate,
-      summary,
+      originalTextSize: state.json.length,
+      optimizedTextSize: summary.length,
     });
 
     return {
